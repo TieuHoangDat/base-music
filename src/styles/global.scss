@@ -1,0 +1,117 @@
+html {
+  body {
+    overflow: hidden;
+    font-family: "Roboto", sans-serif;
+  }
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background-color: hsla(0, 0%, 100%, 0.3);
+}
+
+.swiper {
+  width: 100%;
+  height: fit-content;
+}
+
+.swiper-slide {
+  font-size: 18px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide.swiper-slide-visible.swiper-slide-fully-visible.swiper-slide-active {
+  margin-right: 0;
+}
+
+.swiper {
+  width: 100%;
+  height: fit-content;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  background-color: #ffffff50;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-sizing: border-box;
+  aspect-ratio: 1/1;
+  font-size: 20px;
+  font-weight: 500;
+  width: 40px;
+  height: 40px;
+}
+
+.swiper-button-next,
+.swiper-rtl .swiper-button-prev {
+  width: 40px;
+  aspect-ratio: 1/1;
+}
+
+.swiper-button-disabled {
+  display: none;
+}
+
+.autofill-dark {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #ffffff;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #23232329;
+  }
+}
+
+.autofill-input {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #ffffff;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+$sm: 40rem;
+$md: 48rem;
+$lg: 64rem;
+$xl: 80rem;
+
+$orange-500: #ff4319;
+
+
+
+.orange-gradient-overlay {
+  // Use a CSS linear gradient from orange-ish color to transparent
+  background: linear-gradient(to bottom, rgba(154, 31, 0, 0.25), rgba(240, 82, 41, 0));
+  // The first color (240, 82, 41) is a slightly transparent version of #F05229 (your logo color)
+  // The second color is fully transparent.
+  // You can adjust the transparency (the last number, 0.25) to make it more or less visible.
+}
+
+// Ensure the main content area has a background color to fade into
+.main-content-wrapper {
+  background-color: #121212; // Your main background color
+  
+  // This is important to allow the scrollbar
+  height: 100vh;
+  overflow-y: auto;
+}

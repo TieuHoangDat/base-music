@@ -1,0 +1,8 @@
+services:
+  web:
+    image: tinamusic_fe
+    ports:
+      - "3000:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    restart: always

@@ -1,0 +1,138 @@
+// Define some SCSS variables for easy customization
+$sidebar-width: 250px;
+$sidebar-bg: #2c2c2c;
+$text-color-muted: #a0a0a0;
+$text-color-white: #fff;
+$active-bg: #2c2c2c;
+$logo-color: #F05229;
+$footer-text-color: #555;
+
+// ======================================================
+// Styles for the Drawer component
+// ======================================================
+
+// Styles for the temporary (mobile) drawer
+.sidebar-drawer-mobile {
+  .MuiDrawer-paper {
+    box-sizing: border-box;
+    width: $sidebar-width;
+    background-color: $sidebar-bg;
+  }
+}
+
+// Styles for the permanent (desktop) drawer
+.sidebar-drawer-desktop {
+  .MuiDrawer-paper {
+    box-sizing: border-box;
+    width: $sidebar-width;
+    background-color: $sidebar-bg;
+  }
+}
+
+// ======================================================
+// Styles for the content inside the drawer
+// ======================================================
+
+.sidebar-drawer-content {
+  // Styles from sx prop on the Box component
+  width: $sidebar-width;
+  background-color: $sidebar-bg;
+  height: 100%;
+  color: $text-color-muted;
+  padding: 16px; // p: 2 (MUI spacing)
+}
+
+.sidebar-logo-container {
+  padding: 16px; // p-4
+  margin-bottom: 16px; // mb-4
+}
+
+.sidebar-logo-text {
+  // Styles from sx={{ color: '#F05229', fontWeight: 'bold' }}
+  color: $logo-color;
+  font-weight: bold;
+}
+
+// ======================================================
+// Styles for the list items
+// ======================================================
+
+.sidebar-list-item {
+  // Styles from sx prop on ListItemButton
+  border-radius: 8px;
+  margin-top: 8px; // my: 1
+  margin-bottom: 8px; // my: 1
+  
+  // Custom hover effect
+  &:hover {
+    background-color: $active-bg !important; // Use !important to override MUI's default hover
+    color: $text-color-white;
+  }
+  
+  // Styles for the active state
+  &.sidebar-list-item--active {
+    background-color: $active-bg;
+    color: $text-color-white;
+
+    .MuiListItemIcon-root {
+        color: $text-color-white; // Ensure icon color is also white
+    }
+  }
+
+  .MuiListItemIcon-root {
+    // Styles from sx={{ color: 'inherit' }}
+    color: inherit;
+  }
+}
+
+// ======================================================
+// Styles for other sections
+// ======================================================
+
+.sidebar-footer {
+  // Styles from sx={{ mt: 4 }}
+  margin-top: 32px; // mt: 4 (MUI spacing)
+}
+
+.sidebar-footer-text {
+  // Styles from sx={{ color: '#555' }}
+  color: $footer-text-color;
+}
+
+
+// ... (Your existing SCSS variables)
+$sidebar-bg: #1C1C1C;
+$gradient-color-start: rgba(240, 82, 41, 0.25); // Your orange color with transparency
+$gradient-color-end: rgba(240, 82, 41, 0); // Transparent orange
+
+// ======================================================
+// Styles for the Drawer component
+// ======================================================
+
+
+
+
+
+
+
+.sidebar-gradient-overlay {
+  // Position it absolutely within the sidebar-drawer-content
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; // Make it full height
+  pointer-events: none;
+  
+  // Create the gradient effect
+  background: linear-gradient(
+    to bottom,
+    $gradient-color-start 0%,    
+    $gradient-color-end 35%,     
+    transparent 100%             
+  );
+  
+
+  z-index: 0;
+}
+

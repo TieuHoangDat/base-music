@@ -1,0 +1,136 @@
+# Define stages for pipeline
+stages:
+  - install
+  - test
+  - build-code
+  - build-docker
+  - deploy
+
+# Setup default image for job
+default:
+  image: node:20-alpine
+
+# Variable for job
+variables:
+  FF_USE_FASTZIP: "true" # Fastzip is a performant archiver for cache/artifact archiving and extraction
+  ARTIFACT_COMPRESSION_LEVEL: "fast"
+  CACHE_COMPRESSION_LEVEL: "fast"
+  SEND_MESSAGE_TO_SLACK: "curl -X POST -H 'Content-type: application/json' $SLACK_WEBHOOK_URL --data"
+  IMAGE_NAME_TAG: $REGISTRY_USERNAME/$CI_PROJECT_NAME:latest-dev
+  PROJECT_PATH: $PROJECT_PATH
+  GITLAB_ENV: dev
+  DEPLOY_ENV: dev
+
+# YAML anchors
+.node_modules-cache: &node_modules-cache # Cache node_modules
+  key:
+    files:
+      - yarn.lock
+  paths:
+    - node_modules
+  policy: pull
+
+.run-on-merge-request: &run-on-merge-request # Run job on Merge Requests
+  if: "$CI_MERGE_REQUEST_IID"
+
+.run-on-default-branch: &run-on-default-branch # Run job on main branch
+  if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+
+.run-on-product-tag: &run-on-product-tag # Run job when create tag on main branch
+  if: "$CI_COMMIT_TAG =~ /^v\\d+.\\d+.\\d+/"
+
+.run-on-commit-message: &run-on-commit-message # Run job when commit message have `ci(deploy):` in its name
+  if: "$CI_COMMIT_TAG =~ /ci\\(deploy\\):"
+
+.run-on-file-change: &run-on-file-change # Run job when content in .ci changed
+  changes: ".ci"
+
+.run-on-prod: &run-on-prod
+  if: "$CI_COMMIT_REF_NAME =~ /prod/"
+
+workflow:
+  rules:
+    - <<: *run-on-prod
+      variables:
+        GITLAB_ENV: prod
+        DEPLOY_ENV: prod
+        IMAGE_NAME_TAG: ${REGISTRY_URL}/$REGISTRY_USERNAME/$CI_PROJECT_NAME:latest-prod
+    - when: always
+
+# Jobs
+install_dependencies:
+  stage: install
+  cache:
+    - <<: *node_modules-cache
+      policy: pull-push # We override the policy
+  rules:
+    - <<: *run-on-merge-request
+      when: always
+    - <<: *run-on-default-branch
+      when: manual
+    - <<: *run-on-product-tag
+      when: manual
+  tags:
+    - docker
+  script:
+    - yarn --fronzen-lockfile
+
+code-test:
+  stage: test
+  cache:
+    - <<: *node_modules-cache
+  rules:
+    - <<: *run-on-merge-request
+    - <<: *run-on-default-branch
+    - <<: *run-on-product-tag
+  needs: ["install_dependencies"]
+  tags:
+    - docker
+  script:
+    - yarn lint
+    - yarn prettier
+    - yarn check-types
+
+build-docker:
+  stage: build-docker
+  image: docker
+  environment: $GITLAB_ENV
+  services:
+    - docker:dind
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_BUILDKIT: 1
+  rules:
+    - <<: *run-on-default-branch
+    - <<: *run-on-product-tag
+  needs: ["code-test"]
+  tags:
+    - docker
+  before_script:
+    - docker info
+    - echo "$REGISTRY_PASSWORD"
+    - echo "$REGISTRY_USERNAME"
+    - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USERNAME" --password-stdin
+  script:
+    - docker build --build-arg BUILDKIT_INLINE_CACHE=1 --cache-from=$IMAGE_NAME_TAG -t $IMAGE_NAME_TAG -f ./docker/Dockerfile.$DEPLOY_ENV .
+    - docker push $IMAGE_NAME_TAG
+
+deploy:
+  image: alpine:latest
+  environment: $GITLAB_ENV
+  stage: deploy
+  rules:
+    - <<: *run-on-default-branch
+    - <<: *run-on-product-tag
+  needs: ["build-docker"]
+  tags:
+    - docker
+  before_script:
+    - echo $PROJECT_PATH
+    - apk update && apk add openssh-client curl
+    - mkdir -p ~/.ssh
+    - echo "$DEV_ID_RSA" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+  script:
+    - ssh -o StrictHostKeyChecking=no $SSH_USERNAME@$SSH_HOST "docker login $REGISTRY_URL -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD; pwd; whoami"
+    - ssh -o StrictHostKeyChecking=no $SSH_USERNAME@$SSH_HOST "cd $PROJECT_PATH; pwd; docker pull $IMAGE_NAME_TAG; docker compose up -d; docker image prune -f"

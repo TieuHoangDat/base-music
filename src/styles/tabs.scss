@@ -1,0 +1,14 @@
+.cms-tabs {
+  .MuiTab-root {
+    color: #242728 !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: normal;
+    &.Mui-selected {
+      color: #ff4319 !important;
+    }
+  }
+  .MuiTabs-indicator {
+    background-color: #ff4319 !important;
+  }
+}

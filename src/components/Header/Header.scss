@@ -1,0 +1,109 @@
+// Import theme variables and mixins from MUI theme if needed.
+// You might have a centralized SCSS file for this.
+@use 'sass:map';
+// @use '@mui/material/styles' as mui-styles;
+
+// Note: If you have a custom theme in JS, you might need to
+// manually map those values to SCSS variables.
+// Example:
+// $primary-color: #F05229;
+// $background-color: #121212;
+// $text-color-light: #fff;
+// $text-color-muted: #a0a0a0;
+
+.header-appbar {
+  // Styles from sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}
+  background-color: transparent !important;
+  box-shadow: none !important;
+  position: static;
+}
+
+.header-toolbar {
+  // Styles from Tailwind's `justify-between` and `flex items-center gap-2`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem; // Equivalent to gap-2 in Tailwind
+}
+
+.menu-button {
+  // Styles from sx={{ mr: 2 }}
+  margin-right: 16px; // theme.spacing(2) = 8px * 2 = 16px
+}
+// ... (Your existing SCSS code)
+// ... (Your existing SCSS code)
+
+.search-wrapper {
+    position: relative;
+    border-radius: 9999px;
+    background-color: #441B1B;
+    transition: none; 
+    height: 45px;
+    width: 100%;
+    
+    // *** THÊM DÒNG NÀY ĐỂ CĂN CHỈNH NỘI DUNG ***
+    display: flex;
+    align-items: center;
+    
+    margin-left: 0;
+    
+    @media (min-width: 600px) {
+      margin-left: 24px;
+      width: auto;
+    }
+  }
+  
+  .search-icon-wrapper {
+    color: #c9c9c9;
+    
+    // *** BỎ `position: absolute` VÀ CÁC THUỘC TÍNH KHÁC ***
+    // Thay vào đó, nó sẽ là một item trong flex container
+    // Giữ padding để tạo khoảng cách cho icon
+    padding: 0 16px;
+    
+    // Đảm bảo nó không bị co lại
+    flex-shrink: 0;
+    
+    // `pointerEvents: none` vẫn hữu ích nếu bạn muốn click qua icon
+    pointer-events: none;
+  }
+  
+  .styled-input-base {
+    color: #c9c9c9;
+    width: 100%;
+    
+    // *** BỎ `height` VÀ `padding` TỪ ĐỊNH NGHĨA TRƯỚC ***
+    // Chúng ta sẽ đặt padding và height trong .MuiInputBase-input
+    
+    .MuiInputBase-input {
+      // 4. Thay đổi màu placeholder
+      &::placeholder {
+        color: #947B7A;
+        opacity: 1;
+        padding-left: 0 !important;
+      }
+      
+      // *** CĂN CHỈNH LẠI PADDING VÀ HEIGHT ***
+      // `height: 100%` để nó lấp đầy chiều cao của wrapper
+      height: 100%; 
+      // Bỏ `padding-left: 50px;` vì icon đã có khoảng cách
+      padding: 0; // Giữ padding ngang
+      
+      // Giữ các style khác
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      width: 100%;
+      
+      @media (min-width: 960px) {
+        width: 48ch;
+      }
+    }
+  }
+
+.login-button {
+  // Styles from sx={{ bgcolor: '#F05229', '&:hover': { bgcolor: '#e04c26' } }}
+  background-color: #F05229 !important;
+
+  &:hover {
+    background-color: #e04c26 !important;
+  }
+}
