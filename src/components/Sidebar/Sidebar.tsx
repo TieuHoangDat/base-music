@@ -26,8 +26,11 @@ const sidebarItems = [
   { text: 'Trang chủ', icon: <HomeIcon />, path: '/' },
   { text: 'Bảng xếp hạng', icon: <BarChartIcon />, path: '/ranking' },
   { text: 'Chủ đề và thể loại', icon: <AppsIcon />, path: '/genres' },
-  { text: 'Thư viện', icon: <LibraryMusicIcon />, path: '/library' },
 ];
+
+const sidebarItems2 = [
+    { text: 'Thư viện', icon: <LibraryMusicIcon />, path: '/library' },
+  ];
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isMobile }) => {
   const location = useLocation();
@@ -58,18 +61,42 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isMobile }) => {
       {/* === END: Sidebar Gradient Overlay === */}
 
       {/* Sidebar Content Wrapper with a higher z-index */}
-      <Box sx={{ position: 'relative', zIndex: 1, p: 2 }}>
+      <Box sx={{ position: 'relative', zIndex: 1 }}>
         {/* Logo */}
         <Box className="sidebar-logo-container flex items-center gap-2 p-4 mb-4">
-          <img src="/path/to/laomusic-logo.svg" alt="Lao Music Logo" className="w-10 h-10" />
-          <Typography variant="h5" component="div" className="sidebar-logo-text">
-            Laomusic
-          </Typography>
+          <img src="/image/logo.png" alt="Lao Music Logo" className="w-40 mx-auto block my-3"/>
         </Box>
+
+        <Box className="sidebar-divider" sx={{ my: 2 }} />
 
         {/* Menu Items */}
         <List component="nav">
           {sidebarItems.map((item) => (
+            <ListItemButton
+              key={item.text}
+              component={Link}
+              to={item.path}
+              className={clsx('sidebar-list-item', {
+                'sidebar-list-item--active': location.pathname === item.path,
+              })}
+            >
+              <ListItemIcon className="sidebar-icon">{item.icon}</ListItemIcon>
+                <ListItemText
+                primary={
+                    <span className="text-sm font-semibold ml-0">
+                    {item.text}
+                    </span>
+                }
+              />
+
+            </ListItemButton>
+          ))}
+        </List>
+
+        <Box className="sidebar-divider" sx={{ my: 2 }} />
+        {/* Menu Items */}
+        <List component="nav">
+          {sidebarItems2.map((item) => (
             <ListItemButton
               key={item.text}
               component={Link}
@@ -87,12 +114,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isMobile }) => {
         {/* Placeholder for future sections, like playlists, etc. */}
         <Box className="flex-grow" />
         
-        {/* Example of another section */}
-        <Box className="sidebar-footer">
-          <Typography variant="body2" className="sidebar-footer-text">
-            © 2024 Laomusic
-          </Typography>
-        </Box>
       </Box>
     </Box>
   );

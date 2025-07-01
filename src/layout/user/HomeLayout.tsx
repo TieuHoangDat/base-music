@@ -69,7 +69,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
           p: 3,
           pt: 1,
           ml: { md: 28 },
-          width: { xs: '100%', md: `calc(100% - 280px)` },
+          width: { xs: '100%', md: `calc(100% - 250px)` },
           position: 'relative', // Add relative positioning to this Box too, just in case
           zIndex: 2, // Explicitly set a higher z-index
         }}

@@ -53,9 +53,10 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle }) => {
         
         {/* Right side icons/buttons */}
         <Box className="flex items-center gap-2">
-          <IconButton color="inherit">
+          <IconButton className="icon-circle">
             <SettingsIcon />
           </IconButton>
+          <Box className="divider-vertical" />
           <Button variant="contained" className="login-button">
             Đăng nhập
           </Button>

@@ -6,7 +6,7 @@
 // Note: If you have a custom theme in JS, you might need to
 // manually map those values to SCSS variables.
 // Example:
-// $primary-color: #F05229;
+$primary-color: #FF4218;
 // $background-color: #121212;
 // $text-color-light: #fff;
 // $text-color-muted: #a0a0a0;
@@ -35,7 +35,7 @@
 
 .search-wrapper {
     position: relative;
-    border-radius: 9999px;
+    border-radius: 21px;
     background-color: #441B1B;
     transition: none; 
     height: 45px;
@@ -48,7 +48,7 @@
     margin-left: 0;
     
     @media (min-width: 600px) {
-      margin-left: 24px;
+      margin-left: 13px;
       width: auto;
     }
   }
@@ -80,7 +80,7 @@
       &::placeholder {
         color: #947B7A;
         opacity: 1;
-        padding-left: 0 !important;
+        font-weight: 600;
       }
       
       // *** CĂN CHỈNH LẠI PADDING VÀ HEIGHT ***
@@ -94,16 +94,50 @@
       width: 100%;
       
       @media (min-width: 960px) {
-        width: 48ch;
+        width: 52ch;
       }
     }
   }
 
-.login-button {
-  // Styles from sx={{ bgcolor: '#F05229', '&:hover': { bgcolor: '#e04c26' } }}
-  background-color: #F05229 !important;
-
-  &:hover {
+  .right-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* Icon hình tròn nền tối */
+  .icon-circle {
+    background-color: #432120 !important;
+    border-radius: 9999px !important;
+    padding: 8px !important;
+    color: white !important;
+    transition: background-color 0.2s ease;
+  }
+  
+  .icon-circle:hover {
+    background-color: #442020 !important;
+  }
+  
+  /* Đường kẻ dọc */
+  .divider-vertical {
+    width: 1px;
+    height: 18px;
+    background-color: #7a4c4c;
+    margin: 0 15px;
+  }
+  
+  /* Nút đăng nhập bo tròn và nền cam */
+  .login-button {
+    background-color: $primary-color !important;
+    border-radius: 9999px !important;
+    color: white !important;
+    padding: 8px 15px !important;
+    text-transform: none !important; /* Không viết hoa toàn bộ */
+    font-weight: 600 !important;
+  
+    transition: background-color 0.2s ease;
+  }
+  
+  .login-button:hover {
     background-color: #e04c26 !important;
   }
-}

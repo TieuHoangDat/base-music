@@ -1,11 +1,15 @@
 // Define some SCSS variables for easy customization
 $sidebar-width: 250px;
-$sidebar-bg: #2c2c2c;
+$sidebar-bg: #1c1c1c;
 $text-color-muted: #a0a0a0;
 $text-color-white: #fff;
 $active-bg: #2c2c2c;
 $logo-color: #F05229;
 $footer-text-color: #555;
+$primary-color: #FF4218;
+$sidebar-padding-left: 16px; // Adjust based on your overall sidebar padding
+$active-indicator-glow-color: rgba(240, 82, 41, 0.6); // Slightly transparent orange for glow
+$divider-color: #333333; // A dark grey, adjust as needed for visibility
 
 // ======================================================
 // Styles for the Drawer component
@@ -39,33 +43,32 @@ $footer-text-color: #555;
   background-color: $sidebar-bg;
   height: 100%;
   color: $text-color-muted;
-  padding: 16px; // p: 2 (MUI spacing)
+  padding: 0 !important; // p: 2 (MUI spacing)
 }
 
 .sidebar-logo-container {
-  padding: 16px; // p-4
+//   padding: 16px; // p-4
   margin-bottom: 16px; // mb-4
 }
 
-.sidebar-logo-text {
-  // Styles from sx={{ color: '#F05229', fontWeight: 'bold' }}
-  color: $logo-color;
-  font-weight: bold;
-}
+
+
+
 
 // ======================================================
 // Styles for the list items
 // ======================================================
 
 .sidebar-list-item {
-  // Styles from sx prop on ListItemButton
+  position: relative; // Important for positioning the ::before pseudo-element
   border-radius: 8px;
-  margin-top: 8px; // my: 1
-  margin-bottom: 8px; // my: 1
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 13px !important;
   
   // Custom hover effect
   &:hover {
-    background-color: $active-bg !important; // Use !important to override MUI's default hover
+    background-color: $active-bg !important;
     color: $text-color-white;
   }
   
@@ -73,45 +76,57 @@ $footer-text-color: #555;
   &.sidebar-list-item--active {
     background-color: $active-bg;
     color: $text-color-white;
+    border-top-left-radius: 8px;   
+    border-bottom-left-radius: 8px;
 
     .MuiListItemIcon-root {
         color: $text-color-white; // Ensure icon color is also white
     }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 25%;
+        left: -12px; // Position at the very left edge of the list item
+        width: 4px;
+        height: 50%;
+        background-color: $primary-color; // Main color of the bar
+        border-radius: 4px;
+  
+        // === START: Glowing Effect ===
+        box-shadow: 
+          0 0 8px $active-indicator-glow-color,  // Main glow
+          0 0 16px $active-indicator-glow-color; // More subtle, wider glow
+
+      }
+    // === END: Active Indicator Bar ===
   }
 
   .MuiListItemIcon-root {
-    // Styles from sx={{ color: 'inherit' }}
     color: inherit;
+    // Adjust padding to make space for the indicator if needed
+    // You might want to remove default padding from MUI ListItemIcon here
+    // For example: min-width: 0; margin-right: 16px;
   }
+
 }
 
+.sidebar-text{
+    font-size: 12px !important; // Adjust font size as needed
+}
 // ======================================================
 // Styles for other sections
 // ======================================================
 
-.sidebar-footer {
-  // Styles from sx={{ mt: 4 }}
-  margin-top: 32px; // mt: 4 (MUI spacing)
-}
-
-.sidebar-footer-text {
-  // Styles from sx={{ color: '#555' }}
-  color: $footer-text-color;
-}
-
 
 // ... (Your existing SCSS variables)
 $sidebar-bg: #1C1C1C;
-$gradient-color-start: rgba(240, 82, 41, 0.25); // Your orange color with transparency
+$gradient-color-start: rgba(69, 14, 0, 0.75); // Your orange color with transparency
 $gradient-color-end: rgba(240, 82, 41, 0); // Transparent orange
 
 // ======================================================
 // Styles for the Drawer component
 // ======================================================
-
-
-
-
 
 
 
@@ -128,11 +143,21 @@ $gradient-color-end: rgba(240, 82, 41, 0); // Transparent orange
   background: linear-gradient(
     to bottom,
     $gradient-color-start 0%,    
-    $gradient-color-end 35%,     
+    $gradient-color-end 40%,     
     transparent 100%             
   );
   
 
   z-index: 0;
+}
+
+
+
+
+// Define color for the divider
+.sidebar-divider {
+  border-bottom: 1px solid $divider-color; // A 1px solid line
+  margin: 16px 0; // my: 2 in MUI spacing is 16px (8px * 2)
+  width: 100%; // Ensure it spans the full width of its container
 }
 
