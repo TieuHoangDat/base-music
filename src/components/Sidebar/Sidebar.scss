@@ -21,6 +21,7 @@ $divider-color: #333333; // A dark grey, adjust as needed for visibility
     box-sizing: border-box;
     width: $sidebar-width;
     background-color: $sidebar-bg;
+    overflow-x: hidden;
   }
 }
 
@@ -30,6 +31,7 @@ $divider-color: #333333; // A dark grey, adjust as needed for visibility
     box-sizing: border-box;
     width: $sidebar-width;
     background-color: $sidebar-bg;
+    overflow-x: hidden;
   }
 }
 

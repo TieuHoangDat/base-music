@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 // import Home from "@pages/Home";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import {IRootState} from "@redux/store";
 import {useDispatch, useSelector} from "react-redux";
 import {BrowserRouter, Outlet, Route, Routes} from "react-router-dom";

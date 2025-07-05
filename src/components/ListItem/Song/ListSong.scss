@@ -1,0 +1,62 @@
+.list-song-container {
+    position: relative;
+    // Đảm bảo phần tử con không bị tràn ra ngoài
+  }
+  
+  .list-song-grid {
+    // Thay thế các lớp grid của Tailwind bằng flexbox cho cuộn ngang
+    // Thêm scrollbar-width: none; và -ms-overflow-style: none; để ẩn scrollbar
+    // Đối với webkit (Chrome, Safari), sử dụng pseudo-element
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+  
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+  
+    // Đảm bảo các item không bị co lại khi cuộn
+    .song-item {
+      flex-shrink: 0; // Quan trọng: Ngăn các item co lại
+    }
+  }
+  
+  .list-song-arrow {
+    position: absolute;
+    top: 80px;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.3); // Nền đen trong suốt
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10; // Đảm bảo mũi tên nằm trên các item
+    transition: opacity 0.3s ease-in-out;
+  
+  
+    &--left {
+      left: 10px; // Đặt mũi tên hơi ra ngoài lề trái
+    }
+  
+    &--right {
+      right: 10px; // Đặt mũi tên hơi ra ngoài lề phải
+    }
+  }
+  
+  // Khi màn hình nhỏ hơn, có thể điều chỉnh vị trí mũi tên để không bị tràn
+  @media (max-width: 640px) { // Ví dụ cho breakpoint sm của Tailwind
+    .list-song-arrow {
+      width: 30px;
+      height: 30px;
+      &--left {
+        left: 5px; // Giữ mũi tên gần lề hơn
+      }
+      &--right {
+        right: 5px; // Giữ mũi tên gần lề hơn
+      }
+    }
+  }

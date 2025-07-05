@@ -1,0 +1,95 @@
+$orange-color: #ff5500; // Màu cam cho nút và viền
+$dark-bg: #1e1e1e; // Màu nền tối cho item
+$light-gray: #a0aec0; // Màu xám cho chữ
+$nau: rgba(99, 0, 0, 0.25); 
+
+
+.artist-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Căn giữa nội dung theo chiều ngang
+  cursor: pointer;
+  margin: 10px;
+  width: 180px; // Kích thước cố định cho artist item
+  padding: 15px; // Padding bên trong item
+  border-radius: 0.5rem; // Bo tròn tổng thể
+//   background-color: $nau; // Màu nền mặc định
+  transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  text-align: center; // Căn giữa chữ
+
+  &:hover {
+    box-shadow: 0 0 0 4px $nau; // Viền cam khi hover
+    background-color: $nau; // Nền cam nhạt hơn
+  }
+
+  &__image-wrapper {
+    width: 120px; // Kích thước ảnh tròn
+    height: 120px;
+    border-radius: 50%; // Tạo hình tròn
+    overflow: hidden;
+    margin-bottom: 15px; // Khoảng cách giữa ảnh và thông tin
+    border: 2px solid transparent; // Viền mặc định trong suốt
+    transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+
+    .artist-item:hover & { // Khi hover vào artist-item, ảnh zoom và có viền
+      transform: scale(1.05); // Zoom nhẹ ảnh
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__info {
+    color: white; // Màu chữ trắng
+    margin-bottom: 15px;
+  }
+
+  &__name {
+    font-weight: 700; // Bold
+    font-size: 1.125rem; // text-lg
+    margin-top: 0;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%; // Đảm bảo chiếm đủ chiều rộng để truncate
+  }
+
+  &__stats {
+    font-size: 0.875rem; // text-sm
+    color: $light-gray; // Màu xám nhạt
+    margin: 0;
+  }
+
+  &__like-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $orange-color; // Nền trong suốt mặc định
+    color: white; // Màu chữ và icon cam
+    border: 1px solid $orange-color; // Viền cam
+    border-radius: 9999px; // rounded-full
+    padding: 8px 16px; // px-4 py-2
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+
+
+    &--liked { // Khi đã được yêu thích
+      background-color: $orange-color;
+      color: white;
+      &:hover {
+        background-color: darken($orange-color, 10%); // Cam đậm hơn một chút khi hover đã thích
+      }
+    }
+  }
+
+  &__like-icon {
+    font-size: 1.25rem; // text-xl
+    margin-right: 5px;
+  }
+}

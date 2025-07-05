@@ -1,0 +1,235 @@
+// src/components/Item/Video/VideoItem.scss
+
+$background-dark: #1a1a1a;
+$text-light: #ffffff;
+$text-secondary: #aaaaaa;
+$accent-red: #ff0000;
+$nau: rgba(99, 0, 0, 0.25); // Màu đỏ nâu tương tự như album-item
+
+.video-item {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  width: 220px; // Kích thước cố định cho video item
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  margin: 10px 10px; // Khoảng cách giữa các video items
+  
+  // Thêm transition cho box-shadow và background-color
+  transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  // background-color: #1a1a1a; // Màu nền mặc định cho video-item
+
+  &:hover {
+    // Box-shadow màu đỏ nâu cho TOÀN BỘ video-item
+    box-shadow: 0 0 0 10px $nau; 
+    // Đổi màu nền của video-item thành đỏ nâu khi hover
+    background-color: $nau; 
+
+    .video-item__thumbnail {
+      transform: scale(1.1); // Zoom ảnh lớn hơn 10%
+    }
+
+    .video-item__overlay {
+      opacity: 1; // Hiển thị overlay khi hover
+    }
+    .video-item__play-button {
+      transform: scale(1); // Đảm bảo nút play không bị scale lại nếu có transition ban đầu
+      opacity: 1; // Hiển thị nút play
+    }
+    // Bỏ hiệu ứng opacity và transform cho heart-icon ở đây vì nó luôn hiển thị
+    // .video-item__heart-icon {
+    //   opacity: 1;
+    //   transform: translateY(0);
+    // }
+    .video-item__info {
+        color: white; // Giữ màu chữ trắng hoặc đổi thành màu phù hợp với nền
+    }
+    .video-item__channel,
+    .video-item__views {
+        color: white; // Đổi màu chữ kênh và lượt xem thành trắng để dễ nhìn
+    }
+    // Bỏ hiệu ứng opacity cho menu-button ở đây vì nó luôn hiển thị
+    // .video-item__menu-button {
+    //   opacity: 1; 
+    // }
+  }
+
+  &__thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; // Tỷ lệ 16:9 cho video
+    overflow: hidden;
+    border-radius: 8px; // Bo tròn nhẹ cho thumbnail
+  }
+
+  &__thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out; // Hiệu ứng chuyển động mượt mà cho zoom
+  }
+
+  &__badge {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: $text-light;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    z-index: 2;
+  }
+
+  &__duration {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: $text-light;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    z-index: 2;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.0); // Hoàn toàn trong suốt để không làm mờ ảnh
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; // Mặc định ẩn
+    transition: opacity 0.3s ease-in-out; // Hiệu ứng chuyển động mượt mà cho overlay
+    z-index: 1;
+  }
+
+  &__play-button {
+    background-color: $accent-red;
+    border-radius: 50%;
+    width: 50px; // Kích thước nút
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; // Mặc định ẩn
+    transform: scale(0.8); // Ban đầu nhỏ hơn một chút
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; // Hiệu ứng cho nút play
+  }
+
+  &__play-icon {
+    color: $text-light;
+    font-size: 2rem; // Kích thước icon
+  }
+
+  &__heart-icon {
+    position: absolute;
+    top: 10px; // Giữ nguyên top
+    left: 10px; // Đổi từ right sang left
+    color: $text-light;
+    font-size: 1.5rem;
+    opacity: 1; // Luôn hiển thị
+    transform: translateY(0); // Bỏ hiệu ứng transform ban đầu
+    z-index: 2; // Đảm bảo nằm trên overlay
+    // Bỏ transition liên quan đến opacity và transform nếu không cần hiệu ứng khi hover
+    // transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; 
+  }
+
+  // --- Thay đổi cho phần avatar và menu ---
+  &__details {
+    display: flex;
+    align-items: flex-start; // Căn trên cùng
+    padding: 10px; // Padding cho toàn bộ phần details
+    gap: 10px; // Khoảng cách giữa avatar và info
+    position: relative; // Để menu button có thể position absolute
+  }
+
+  &__channel-avatar {
+    flex-shrink: 0; // Không co lại
+    width: 36px; // Kích thước avatar
+    height: 36px;
+    border-radius: 50%; // Hình tròn
+    overflow: hidden;
+    margin-top: 2px; // Điều chỉnh vị trí thẳng hàng với tiêu đề
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    flex-grow: 1; // Chiếm hết không gian còn lại
+    color: $text-light;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0; // Bỏ padding cũ
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+
+  &__title {
+    width: 130px;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 2px; // Giảm khoảng cách với channel
+    white-space: nowrap; // Đảm bảo chỉ trên 1 dòng
+    overflow: hidden; // Ẩn phần nội dung tràn ra ngoài
+    text-overflow: ellipsis; // Thêm dấu ... nếu nội dung quá dài
+    // width: calc(100% - 20px); // Giữ nguyên hoặc điều chỉnh nếu cần không gian cho nút menu
+    // Bỏ các thuộc tính -webkit-box nếu không muốn giới hạn số dòng (chỉ 1 dòng)
+    // display: -webkit-box;
+    // -webkit-line-clamp: 2;
+    // -webkit-box-orient: vertical;
+  }
+
+  &__channel {
+    width: 130px !important;
+    color: $text-secondary;
+    font-size: 0.875rem;
+    margin: 0;
+    white-space: nowrap; // Đảm bảo chỉ trên 1 dòng
+    overflow: hidden; // Ẩn phần nội dung tràn ra ngoài
+    text-overflow: ellipsis; // Thêm dấu ... nếu nội dung quá dài
+    width: 100%; // Đảm bảo chiếm đủ chiều rộng
+    transition: color 0.3s ease-in-out;
+  }
+
+  &__views { // Giữ nguyên cho views
+    color: $text-secondary;
+    font-size: 0.875rem;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    transition: color 0.3s ease-in-out;
+  }
+
+  &__menu-button {
+    position: absolute;
+    top: 5px; // Điều chỉnh vị trí top cho nút menu
+    right: 0px; // Điều chỉnh vị trí right cho nút menu
+    color: $text-secondary;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 5px;
+    opacity: 1; // Luôn hiển thị
+    // Bỏ transition liên quan đến opacity nếu không cần hiệu ứng khi hover
+    // transition: opacity 0.3s ease-in-out; 
+    align-self: flex-start; // Căn trên cùng
+  }
+}

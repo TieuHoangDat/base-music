@@ -1,0 +1,64 @@
+.list-artist-section {
+    position: relative;
+    margin-bottom: 100px !important; // Đảm bảo không bị tràn ra ngoài
+}
+
+.list-artist-container {
+  position: relative;
+}
+
+.list-artist-grid {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  .artist-item {
+    flex-shrink: 0; // Quan trọng: Ngăn các item co lại
+  }
+}
+
+.list-artist-arrow {
+  position: absolute;
+  top: 150px; // Điều chỉnh vị trí mũi tên theo chiều dọc, khoảng giữa ảnh và nút
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: opacity 0.3s ease-in-out, background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.5); // Nền đậm hơn khi hover
+  }
+
+  &--left {
+    left: 10px;
+  }
+
+  &--right {
+    right: 10px;
+  }
+}
+
+@media (max-width: 640px) {
+  .list-artist-arrow {
+    width: 30px;
+    height: 30px;
+    &--left {
+      left: 5px;
+    }
+    &--right {
+      right: 5px;
+    }
+  }
+}

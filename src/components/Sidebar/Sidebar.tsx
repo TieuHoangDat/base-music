@@ -24,12 +24,12 @@ interface SidebarProps {
 
 const sidebarItems = [
   { text: 'Trang chủ', icon: <HomeIcon />, path: '/' },
-  { text: 'Bảng xếp hạng', icon: <BarChartIcon />, path: '/ranking' },
-  { text: 'Chủ đề và thể loại', icon: <AppsIcon />, path: '/genres' },
+  { text: 'Bảng xếp hạng', icon: <BarChartIcon />, path: '/#' },
+  { text: 'Chủ đề và thể loại', icon: <AppsIcon />, path: '/#' },
 ];
 
 const sidebarItems2 = [
-    { text: 'Thư viện', icon: <LibraryMusicIcon />, path: '/library' },
+    { text: 'Thư viện', icon: <LibraryMusicIcon />, path: '/#' },
   ];
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isMobile }) => {

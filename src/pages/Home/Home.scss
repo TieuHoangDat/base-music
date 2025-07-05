@@ -1,0 +1,16 @@
+/* Home.scss */
+
+// Ẩn thanh cuộn cho WebKit browsers (Chrome, Safari, Edge)
+.hide-scrollbar {
+    &::-webkit-scrollbar {
+      display: none; // Ẩn hoàn toàn thanh cuộn
+    }
+    /* For Internet Explorer, Edge, and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.container {
+    padding-left: 0 !important;
+    width: 100%;
+}
