@@ -1,0 +1,126 @@
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1a;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 16px;
+  box-sizing: border-box;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(
+      to bottom,
+      rgba(103, 19, 0, 0.4),
+      rgba(255, 66, 24, 0)
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+.search-overlay-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-top: 20px;
+}
+
+.search-input-wrapper {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  background-color: #333333;
+  border-radius: 12px;
+  height: 48px;
+  padding: 0 16px;
+}
+
+.search-overlay-icon {
+  color: #999999;
+  margin-right: 8px;
+}
+
+.search-overlay-input {
+  .MuiInputBase-input {
+    color: #ffffff;
+    width: 100%;
+    &::placeholder {
+      color: #999999;
+      opacity: 1;
+    }
+  }
+}
+
+.cancel-button {
+  color: #ffffff !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  font-size: 1.2rem !important;
+  border: 0.5px solid #4d4d4d !important;
+  background-color: transparent !important;
+}
+
+.search-content {
+  flex-grow: 1;
+  padding-bottom: 16px;
+}
+
+.section-title {
+  color: #ffffff;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 16px;
+}
+
+.trending-list {
+  padding: 0;
+  margin-bottom: 32px;
+  background-color: rgba(#b6b6b6, 0.1);
+  border-radius: 12px;
+}
+
+.trending-list-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.trending-item-number {
+  color: #999999;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  width: 30px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.trending-item-text {
+  .MuiListItemText-primary {
+    color: #ffffff;
+    font-size: 1.1rem !important;
+    font-weight: 500 !important;
+  }
+}
+
+.search-divider {
+  background-color: #444444 !important;
+  margin: 32px 0;
+}
+
+.no-history-text {
+  color: #999999;
+  font-style: italic;
+  font-size: 0.95rem !important;
+}

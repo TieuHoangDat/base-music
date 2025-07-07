@@ -12,132 +12,174 @@ $primary-color: #FF4218;
 // $text-color-muted: #a0a0a0;
 
 .header-appbar {
-  // Styles from sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}
   background-color: transparent !important;
   box-shadow: none !important;
   position: static;
 }
 
 .header-toolbar {
-  // Styles from Tailwind's `justify-between` and `flex items-center gap-2`
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 0.5rem; // Equivalent to gap-2 in Tailwind
+
+  // Mobile specific adjustments for toolbar
+  @media (max-width: 959px) { // Adjust breakpoint if 'md' is different
+    justify-content: space-between; // Ensure space between items
+    gap: 0; // Remove gap for mobile to control spacing precisely
+  }
 }
 
 .menu-button {
-  // Styles from sx={{ mr: 2 }}
   margin-right: 16px; // theme.spacing(2) = 8px * 2 = 16px
+  
+  // No margin for mobile if it's the first item
+  @media (max-width: 959px) {
+    margin-right: 0;
+  }
 }
-// ... (Your existing SCSS code)
-// ... (Your existing SCSS code)
+
+// Mobile Logo Styles
+.mobile-logo-container {
+  flex-grow: 1; // Allows the logo container to take available space
+  display: flex;
+  justify-content: center; // Center the logo horizontally
+  align-items: center; // Center the logo vertically if needed
+}
+
+.mobile-logo {
+  width: 160px; // Equivalent to w-40 in Tailwind (16*10 = 160px)
+  height: auto;
+  display: block; // Ensures it behaves like a block element for centering
+  margin-left: auto;
+  margin-right: auto;
+  // Adjust margin to counteract default spacing if needed
+}
+
+.mobile-search-icon {
+  color: rgb(196, 196, 196) !important; // Adjust color as needed
+  margin-left: 16px; // Add some margin to the left of the icon
+}
 
 .search-wrapper {
-    position: relative;
-    border-radius: 21px;
-    background-color: #441B1B;
-    transition: none; 
-    height: 45px;
+  position: relative;
+  border-radius: 21px;
+  background-color: #441B1B;
+  transition: none; 
+  height: 45px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+  
+  @media (min-width: 600px) {
+    margin-left: 13px;
+    width: auto;
+  }
+}
+
+.search-icon-wrapper {
+  color: #c9c9c9;
+  padding: 0 16px;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.styled-input-base {
+  color: #c9c9c9;
+  width: 100%;
+  
+  .MuiInputBase-input {
+    &::placeholder {
+      color: #947B7A;
+      opacity: 1;
+      font-weight: 600;
+    }
+    caret-color: white !important;
+    height: 100%; 
+    padding: 0;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     width: 100%;
     
-    // *** THÊM DÒNG NÀY ĐỂ CĂN CHỈNH NỘI DUNG ***
-    display: flex;
-    align-items: center;
-    
-    margin-left: 0;
-    
-    @media (min-width: 600px) {
-      margin-left: 13px;
-      width: auto;
+    @media (min-width: 960px) {
+      width: 52ch;
     }
   }
-  
-  .search-icon-wrapper {
-    color: #c9c9c9;
-    
-    // *** BỎ `position: absolute` VÀ CÁC THUỘC TÍNH KHÁC ***
-    // Thay vào đó, nó sẽ là một item trong flex container
-    // Giữ padding để tạo khoảng cách cho icon
-    padding: 0 16px;
-    
-    // Đảm bảo nó không bị co lại
-    flex-shrink: 0;
-    
-    // `pointerEvents: none` vẫn hữu ích nếu bạn muốn click qua icon
-    pointer-events: none;
-  }
-  
-  .styled-input-base {
-    color: #c9c9c9;
-    width: 100%;
-    
-    // *** BỎ `height` VÀ `padding` TỪ ĐỊNH NGHĨA TRƯỚC ***
-    // Chúng ta sẽ đặt padding và height trong .MuiInputBase-input
-    
-    .MuiInputBase-input {
-      // 4. Thay đổi màu placeholder
-      &::placeholder {
-        color: #947B7A;
-        opacity: 1;
-        font-weight: 600;
-      }
-      
-      // *** CĂN CHỈNH LẠI PADDING VÀ HEIGHT ***
-      // `height: 100%` để nó lấp đầy chiều cao của wrapper
-      height: 100%; 
-      // Bỏ `padding-left: 50px;` vì icon đã có khoảng cách
-      padding: 0; // Giữ padding ngang
-      
-      // Giữ các style khác
-      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-      width: 100%;
-      
-      @media (min-width: 960px) {
-        width: 52ch;
-      }
-    }
+}
+
+.right-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-circle {
+  background-color: #432120 !important;
+  border-radius: 9999px !important;
+  padding: 8px !important;
+  color: white !important;
+  transition: background-color 0.2s ease;
+}
+
+.icon-circle:hover {
+  background-color: #442020 !important;
+}
+
+.divider-vertical {
+  width: 1px;
+  height: 18px;
+  background-color: #7a4c4c;
+  margin: 0 15px;
+}
+
+.login-button {
+  background-color: $primary-color !important;
+  border-radius: 9999px !important;
+  color: white !important;
+  padding: 8px 15px !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+
+  transition: background-color 0.2s ease;
+}
+
+.login-button:hover {
+  background-color: #e04c26 !important;
+}
+
+
+
+// Container cho phần search bar và dropdown trên desktop
+.search-container-desktop {
+  position: relative; // QUAN TRỌNG: Đặt relative để dropdown có thể absolute bên trong nó
+  flex-grow: 1; // Cho phép nó mở rộng nếu cần
+  max-width: 500px; // Giới hạn chiều rộng của search bar desktop
+  margin-left: 13px; // Giữ margin left nếu bạn muốn
+}
+
+// Wrapper cho input base
+.search-wrapper-desktop {
+  position: relative; // Đảm bảo input base cũng được định vị đúng
+  border-radius: 21px;
+  background-color: #441B1B;
+  height: 45px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &.dropdown-open {
+    border-bottom-left-radius: 0;  // Bỏ bo tròn góc dưới bên trái
+    border-bottom-right-radius: 0; // Bỏ bo tròn góc dưới bên phải
+    border-radius: 21px 21px 0 0; // Giữ bo tròn góc trên, bỏ góc dưới
   }
 
-  .right-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  // SearchDropdown sẽ được định vị absolute bên trong wrapper này
+  .search-dropdown-container { // Nhắm mục tiêu vào SearchDropdown
+    position: absolute;
+    top: calc(100%); // Đặt dưới search wrapper 8px
+    left: 0;
+    width: 100%; // Chiều rộng bằng với search wrapper
+    z-index: 100; // Đảm bảo nó nằm trên các phần tử khác
+    // Các styles còn lại của search-dropdown-container sẽ nằm trong SearchDropdown.scss
   }
-  
-  /* Icon hình tròn nền tối */
-  .icon-circle {
-    background-color: #432120 !important;
-    border-radius: 9999px !important;
-    padding: 8px !important;
-    color: white !important;
-    transition: background-color 0.2s ease;
-  }
-  
-  .icon-circle:hover {
-    background-color: #442020 !important;
-  }
-  
-  /* Đường kẻ dọc */
-  .divider-vertical {
-    width: 1px;
-    height: 18px;
-    background-color: #7a4c4c;
-    margin: 0 15px;
-  }
-  
-  /* Nút đăng nhập bo tròn và nền cam */
-  .login-button {
-    background-color: $primary-color !important;
-    border-radius: 9999px !important;
-    color: white !important;
-    padding: 8px 15px !important;
-    text-transform: none !important; /* Không viết hoa toàn bộ */
-    font-weight: 600 !important;
-  
-    transition: background-color 0.2s ease;
-  }
-  
-  .login-button:hover {
-    background-color: #e04c26 !important;
-  }
+}
