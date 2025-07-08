@@ -2,7 +2,6 @@
 import React from 'react';
 import { Box, Button, InputBase, Typography, List, ListItem, ListItemText, Divider } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import CloseIcon from '@mui/icons-material/Close'; // Import icon Close
 import './SearchOverlay.scss';
 
 interface SearchOverlayProps {

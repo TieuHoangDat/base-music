@@ -1,6 +1,6 @@
 // AlbumItem.scss
+@use '../../../styles/variables' as var;
 
-$nau: rgba(99, 0, 0, 0.25); 
 
 .album-item {
     display: flex;
@@ -20,8 +20,8 @@ $nau: rgba(99, 0, 0, 0.25);
     }
 
     &:hover {
-      box-shadow: 0 0 0 10px $nau;
-      background-color: $nau;
+      box-shadow: 0 0 0 10px var.$brown;
+      background-color: var.$brown;
   
       .album-item__image {
         transform: scale(1.1);
@@ -110,7 +110,7 @@ $nau: rgba(99, 0, 0, 0.25);
     }
   
     &__artist {
-      color: #a0aec0;
+      color: var.$text-color;
       font-size: 0.875rem;
       margin: 0;
       white-space: nowrap;

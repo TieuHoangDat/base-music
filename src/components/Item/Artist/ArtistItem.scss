@@ -1,7 +1,6 @@
-$orange-color: #ff5500; // Màu cam cho nút và viền
+@use '../../../styles/variables' as var;
+
 $dark-bg: #1e1e1e; // Màu nền tối cho item
-$light-gray: #a0aec0; // Màu xám cho chữ
-$nau: rgba(99, 0, 0, 0.25); 
 
 
 .artist-item {
@@ -13,13 +12,12 @@ $nau: rgba(99, 0, 0, 0.25);
   width: 180px; // Kích thước cố định cho artist item
   padding: 15px; // Padding bên trong item
   border-radius: 0.5rem; // Bo tròn tổng thể
-//   background-color: $nau; // Màu nền mặc định
   transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
   text-align: center; // Căn giữa chữ
 
   &:hover {
-    box-shadow: 0 0 0 4px $nau; // Viền cam khi hover
-    background-color: $nau; // Nền cam nhạt hơn
+    box-shadow: 0 0 0 4px var.$brown; // Viền cam khi hover
+    background-color: var.$brown; // Nền cam nhạt hơn
   }
 
   &__image-wrapper {
@@ -60,7 +58,7 @@ $nau: rgba(99, 0, 0, 0.25);
 
   &__stats {
     font-size: 0.875rem; // text-sm
-    color: $light-gray; // Màu xám nhạt
+    color: var.$text-color; // Màu xám nhạt
     margin: 0;
   }
 
@@ -68,9 +66,9 @@ $nau: rgba(99, 0, 0, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $orange-color; // Nền trong suốt mặc định
+    background-color: var.$primary-color; // Nền trong suốt mặc định
     color: white; // Màu chữ và icon cam
-    border: 1px solid $orange-color; // Viền cam
+    border: 1px solid var.$primary-color; // Viền cam
     border-radius: 9999px; // rounded-full
     padding: 8px 16px; // px-4 py-2
     font-size: 0.875rem;
@@ -80,11 +78,8 @@ $nau: rgba(99, 0, 0, 0.25);
 
 
     &--liked { // Khi đã được yêu thích
-      background-color: $orange-color;
+      background-color: var.$primary-color;
       color: white;
-      &:hover {
-        // background-color: darken($orange-color, 10%); // Cam đậm hơn một chút khi hover đã thích
-      }
     }
   }
 

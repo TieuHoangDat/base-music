@@ -6,7 +6,6 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Typography,
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import BarChartIcon from '@mui/icons-material/BarChart';

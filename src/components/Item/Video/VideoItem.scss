@@ -1,10 +1,10 @@
 // src/components/Item/Video/VideoItem.scss
+@use '../../../styles/variables' as var;
+
 
 $background-dark: #1a1a1a;
 $text-light: #ffffff;
-$text-secondary: #aaaaaa;
 $accent-red: #ff0000;
-$nau: rgba(99, 0, 0, 0.25); // Màu đỏ nâu tương tự như album-item
 
 .video-item {
   display: flex;
@@ -22,9 +22,9 @@ $nau: rgba(99, 0, 0, 0.25); // Màu đỏ nâu tương tự như album-item
 
   &:hover {
     // Box-shadow màu đỏ nâu cho TOÀN BỘ video-item
-    box-shadow: 0 0 0 10px $nau; 
+    box-shadow: 0 0 0 10px var.$brown; 
     // Đổi màu nền của video-item thành đỏ nâu khi hover
-    background-color: $nau; 
+    background-color: var.$brown; 
 
     .video-item__thumbnail {
       transform: scale(1.1); // Zoom ảnh lớn hơn 10%
@@ -196,7 +196,7 @@ $nau: rgba(99, 0, 0, 0.25); // Màu đỏ nâu tương tự như album-item
 
   &__channel {
     width: 130px !important;
-    color: $text-secondary;
+    color: var(--text-color);
     font-size: 0.875rem;
     margin: 0;
     white-space: nowrap; // Đảm bảo chỉ trên 1 dòng
@@ -207,7 +207,7 @@ $nau: rgba(99, 0, 0, 0.25); // Màu đỏ nâu tương tự như album-item
   }
 
   &__views { // Giữ nguyên cho views
-    color: $text-secondary;
+    color: var(--text-color);
     font-size: 0.875rem;
     margin: 0;
     white-space: nowrap;
@@ -221,7 +221,7 @@ $nau: rgba(99, 0, 0, 0.25); // Màu đỏ nâu tương tự như album-item
     position: absolute;
     top: 5px; // Điều chỉnh vị trí top cho nút menu
     right: 0px; // Điều chỉnh vị trí right cho nút menu
-    color: $text-secondary;
+    color: var(--text-color);
     font-size: 1.5rem;
     cursor: pointer;
     background: none;

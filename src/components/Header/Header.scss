@@ -1,12 +1,12 @@
 // Import theme variables and mixins from MUI theme if needed.
 // You might have a centralized SCSS file for this.
 @use 'sass:map';
+@use '../../styles/variables' as var;
 // @use '@mui/material/styles' as mui-styles;
 
 // Note: If you have a custom theme in JS, you might need to
 // manually map those values to SCSS variables.
 // Example:
-$primary-color: #FF4218;
 // $background-color: #121212;
 // $text-color-light: #fff;
 // $text-color-muted: #a0a0a0;
@@ -133,7 +133,7 @@ $primary-color: #FF4218;
 }
 
 .login-button {
-  background-color: $primary-color !important;
+  background-color: var.$primary-color !important;
   border-radius: 9999px !important;
   color: white !important;
   padding: 8px 15px !important;

@@ -105,7 +105,7 @@
   }
 
   &__artist {
-    color: #a0aec0;
+    color: var(--text-color);
     font-size: 0.75rem;
     margin: 0;
     white-space: nowrap;

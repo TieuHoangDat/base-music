@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 // Define some SCSS variables for easy customization
 $sidebar-width: 250px;
 $sidebar-bg: #1c1c1c;
@@ -5,8 +7,6 @@ $text-color-muted: #a0a0a0;
 $text-color-white: #fff;
 $active-bg: #2c2c2c;
 $logo-color: #F05229;
-$footer-text-color: #555;
-$primary-color: #FF4218;
 $sidebar-padding-left: 16px; // Adjust based on your overall sidebar padding
 $active-indicator-glow-color: rgba(240, 82, 41, 0.6); // Slightly transparent orange for glow
 $divider-color: #333333; // A dark grey, adjust as needed for visibility
@@ -68,11 +68,6 @@ $divider-color: #333333; // A dark grey, adjust as needed for visibility
   margin-bottom: 8px;
   margin-left: 13px !important;
   
-  // Custom hover effect
-  &:hover {
-    background-color: $active-bg !important;
-    color: $text-color-white;
-  }
   
   // Styles for the active state
   &.sidebar-list-item--active {
