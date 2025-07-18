@@ -1,6 +1,6 @@
 import "@fontsource/roboto";
 import {createTheme, ThemeProvider} from "@mui/material";
-import store from "@redux/store.ts";
+import { store } from './redux/store';
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {StrictMode} from "react";
 import {createRoot} from "react-dom/client";

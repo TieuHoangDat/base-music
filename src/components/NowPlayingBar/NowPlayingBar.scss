@@ -1,0 +1,163 @@
+.now-playing-bar {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: #282828;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    height: 90px; // Thêm chiều cao cố định cho thanh phát nhạc
+
+    // Thiết lập chung cho desktop
+    .song-info {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      img {
+        width: 56px;
+        height: 56px;
+        border-radius: 4px;
+        margin-right: 12px;
+      }
+      p {
+        font-size: 0.875rem;
+      }
+      .font-bold {
+        font-weight: 700;
+      }
+      .text-gray-400 {
+        color: #9ca3af;
+      }
+    }
+  
+    .playback-controls {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 1rem;
+  
+      .buttons {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+  
+        .control-button {
+          font-size: 1.5rem;
+          color: #9ca3af;
+          cursor: pointer;
+          margin: 0 0.5rem;
+  
+          &:hover {
+            color: #fff;
+          }
+  
+          &.MuiSvgIcon-root {
+            &.text-4xl {
+              font-size: 2.25rem;
+            }
+          }
+        }
+      }
+  
+      .progress-bar {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 400px;
+  
+        .MuiSlider-root {
+          flex-grow: 1;
+          margin: 0 0.5rem;
+        }
+  
+        span {
+          font-size: 0.75rem;
+          color: #9ca3af;
+        }
+      }
+    }
+  
+    .volume-controls {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+  
+      .MuiSlider-root {
+        width: 100px;
+        margin-left: 1rem;
+      }
+      .control-button {
+        color: #9ca3af;
+        cursor: pointer;
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+
+    // Media Queries cho màn hình nhỏ hơn 768px (điện thoại)
+    // TailwindCSS 'md' breakpoint mặc định là 768px.
+    // Chúng ta sẽ dùng max-width để apply styles cho mobile.
+    @media (max-width: 767px) { // < md (mobile screens)
+        flex-direction: row; // Giữ nguyên row layout
+        padding: 0.75rem; // Giảm padding một chút
+        height: 70px; // Giảm chiều cao thanh phát nhạc trên mobile
+
+        .song-info {
+            flex-basis: 30%; // Chiếm 30% chiều rộng
+            // Kích thước ảnh và margin sẽ được Tailwind xử lý (w-14, mr-3)
+            img {
+                width: 48px; // Nhỏ hơn một chút trên mobile
+                height: 48px;
+            }
+            p {
+              font-size: 0.75rem; // Giảm kích thước font
+            }
+            .font-bold {
+                // Giữ nguyên
+            }
+        }
+
+        .playback-controls {
+            flex-basis: 70%; // Chiếm 70% chiều rộng còn lại
+            margin: 0 0.5rem; // Giảm margin
+            .buttons {
+                margin-bottom: 0.25rem; // Giảm mb
+                .control-button {
+                    font-size: 1.25rem; // Nhỏ hơn
+                    margin: 0 0.25rem; // Giảm mx
+                    &.MuiSvgIcon-root {
+                        &.text-3xl { // Icons play/pause
+                            font-size: 1.75rem; // Nhỏ hơn nữa
+                        }
+                    }
+                }
+            }
+            .progress-bar {
+                max-width: 100%; // Cho phép nó chiếm toàn bộ chiều rộng có sẵn
+                span {
+                    font-size: 0.65rem; // Nhỏ hơn
+                    margin: 0 0.1rem;
+                }
+                .MuiSlider-root {
+                    margin: 0 0.25rem;
+                }
+            }
+        }
+
+        .volume-controls {
+            // Đây sẽ bị hidden bởi Tailwind class 'hidden' trên mobile
+            // Nếu bạn muốn hiển thị một chút, bạn có thể override ở đây
+            // hoặc dùng md:hidden trong NowPlayingBar.tsx
+            display: none; // Đảm bảo ẩn nếu Tailwind không hoạt động đúng
+        }
+    }
+
+
+}

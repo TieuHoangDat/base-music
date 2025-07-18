@@ -1,63 +1,49 @@
-import GlobalSettingSlice from "@redux/slices/GlobalSettingSlice";
-import {configureStore} from "@reduxjs/toolkit";
-import {combineReducers} from "redux";
+import { configureStore } from '@reduxjs/toolkit';
 import {
+  persistStore,
+  persistReducer,
   FLUSH,
+  REHYDRATE,
   PAUSE,
   PERSIST,
-  persistReducer,
-  persistStore,
   PURGE,
   REGISTER,
-  REHYDRATE,
-} from "redux-persist";
-import createWebStorage from "redux-persist/lib/storage/createWebStorage";
-import Config from "../config";
+  // XÓA createTransform NẾU BẠN CÓ DÒNG NÀY Ở ĐÂY
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import musicPlayerReducer from './slices/musicPlayerSlice';
 
-const createNoopStorage = (): {
-  getItem: (_key: string) => Promise<null>;
-  setItem: (_key: string, value: unknown) => Promise<unknown>;
-  removeItem: (_key: string) => Promise<void>;
-} => {
-  return {
-    getItem(): Promise<null> {
-      return Promise.resolve(null);
-    },
-    setItem(_key, value): Promise<unknown> {
-      return Promise.resolve(value);
-    },
-    removeItem(): Promise<void> {
-      return Promise.resolve();
-    },
-  };
-};
+// XÓA TOÀN BỘ PHẦN musicPlayerTransform NÀY
+// const musicPlayerTransform = createTransform(
+//   (inboundState: any, key) => {
+//     return inboundState;
+//   },
+//   (outboundState: any, key) => {
+//     return {
+//       ...outboundState,
+//       currentTime: 0,
+//       volume: 0.5,
+//       isMuted: false,
+//     };
+//   },
+//   { whitelist: ['musicPlayer'] }
+// );
 
-const storage =
-  typeof window !== "undefined"
-    ? createWebStorage("local")
-    : createNoopStorage();
 
 const persistConfig = {
-  key: Config.STORE_NAME,
+  key: 'root', // key for localStorage
   version: 1,
-  storage: storage,
-  blacklist: ["modal", "player"],
+  storage,
+  whitelist: ['musicPlayer'], // Chỉ định reducer nào bạn muốn persist (currentSong, isPlaying, currentTime, volume, isMuted)
+  // XÓA DÒNG transforms: [musicPlayerTransform], NẾU BẠN CÓ NÓ Ở ĐÂY
 };
 
-const settingsPersistConfig = {
-  key: "settings",
-  storage: storage,
-  blacklist: [],
-};
+const persistedReducer = persistReducer(persistConfig, musicPlayerReducer);
 
-const rootReducers = combineReducers({
-  settings: persistReducer(settingsPersistConfig, GlobalSettingSlice),
-});
-
-const persistedReducer = persistReducer(persistConfig, rootReducers);
-
-const store = configureStore({
-  reducer: persistedReducer,
+export const store = configureStore({
+  reducer: {
+    musicPlayer: persistedReducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -68,7 +54,6 @@ const store = configureStore({
 
 export const persistor = persistStore(store);
 
-export default store;
-
-export type IRootState = ReturnType<typeof store.getState>;
-export type IAppDispatch = typeof store.dispatch;
+// Định nghĩa RootState và AppDispatch cho TypeScrip
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
