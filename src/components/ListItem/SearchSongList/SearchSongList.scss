@@ -1,0 +1,54 @@
+@use '../../../styles/variables' as var;
+
+.search-song-list {
+  margin-top: 20px;
+
+  .list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var.$border-color; // Đường kẻ dưới header (ví dụ: #333)
+    color: var.$text-color-muted;
+    font-weight: 600;
+
+    .header-index {
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .header-title {
+      flex-grow: 1;
+      margin-left: 65px; // Căn chỉnh với ảnh/tiêu đề của item
+    }
+
+    .header-album-playlist {
+      min-width: 150px;
+      text-align: right;
+      margin-left: 20px; // Khoảng cách với cột tiêu đề
+      flex-shrink: 0;
+
+      @media (max-width: 768px) { // Ẩn trên màn hình nhỏ hơn
+        display: none;
+      }
+    }
+
+    .header-duration {
+      width: 50px;
+      text-align: right;
+      margin-left: 20px; // Khoảng cách với cột album
+      flex-shrink: 0;
+    }
+  }
+
+  .no-songs-found {
+    text-align: center;
+    color: var.$text-color-muted;
+    padding: 50px;
+  }
+}
+
+// Định nghĩa các biến SCSS trong styles/variables.scss (ví dụ)
+// $border-color: #333;

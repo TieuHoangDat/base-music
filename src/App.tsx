@@ -13,6 +13,8 @@ import "./styles/style.scss";
 import {updateUserInfo} from "@redux/slices/UserSlice";
 // import ApiAuth from "@api/ApiAuth";
 import {useQueryClient} from "@tanstack/react-query";
+import SearchResultsPage from "./pages/SearchResultsPage/SearchResultsPage"; // Import trang kết quả tìm kiếm
+
 function App() {
   const dispatch = useDispatch();
   // const {accessToken} = useSelector(
@@ -47,6 +49,8 @@ function App() {
               }
             >
               <Route path="/" element={<Home />} />
+              {/* Thêm route cho trang kết quả tìm kiếm */}
+              <Route path="/search" element={<SearchResultsPage />} />
             </Route>
           </Route>
         </Routes>
