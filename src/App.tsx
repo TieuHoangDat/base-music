@@ -11,7 +11,7 @@ import HomeLayout from "./layout/user/HomeLayout";
 import "./styles/global.scss";
 import "./styles/style.scss";
 import {updateUserInfo} from "@redux/slices/UserSlice";
-import ApiAuth from "@api/ApiAuth";
+// import ApiAuth from "@api/ApiAuth";
 import {useQueryClient} from "@tanstack/react-query";
 function App() {
   const dispatch = useDispatch();

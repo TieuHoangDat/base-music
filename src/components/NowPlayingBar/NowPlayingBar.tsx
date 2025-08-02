@@ -15,6 +15,45 @@ import {
 import { PlayArrow, Pause, SkipNext, SkipPrevious, VolumeUp, VolumeMute } from '@mui/icons-material';
 import Slider from '@mui/material/Slider';
 import './NowPlayingBar.scss'; // Import SCSS file
+import { fetcher } from '../../api/Fetcher';
+
+
+interface IArtistFromApi {
+  id: string;
+  name: string;
+  // ... các thuộc tính khác của artist nếu cần
+}
+
+interface IAudioFromApi {
+  id: string;
+  url: string;
+  // ...
+}
+
+interface IImagesFromApi {
+  SMALL: string;
+  DEFAULT: string;
+}
+
+interface ISongFromApi {
+  id: string;
+  name: string; // Tên bài hát
+  artists: IArtistFromApi[];
+  audios: IAudioFromApi[];
+  images: IImagesFromApi;
+  duration: number; // Duration ở đây là number (giây)
+  // ... các thuộc tính khác từ API mà bạn không cần ánh xạ
+}
+
+// 2. Định nghĩa Interface cho định dạng DỮ LIỆU ĐÍCH
+interface ITransformedSong {
+  id: string;
+  image: string;
+  title: string;
+  artist: string;
+  song: string;
+  duration: string; // duration ở định dạng đích là string
+}
 
 const NowPlayingBar: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -31,6 +70,47 @@ const NowPlayingBar: React.FC = () => {
         audioRef.current.volume = isMuted ? 0 : volume;
     }
   }, [volume, isMuted]);
+
+  
+  useEffect(() => {
+    async function getAndMapRecommendedSongs() {
+      try {
+
+        // Gọi hàm fetcher, mong đợi một mảng ISongFromApi
+        const fetchedSongs: ISongFromApi[] = await fetcher<ISongFromApi[]>({
+          url: '/songs/recommended',
+          method: 'GET',
+        });
+
+        console.log('Dữ liệu bài hát đề xuất API gốc:', fetchedSongs);
+
+        // 3. Ánh xạ (Map) dữ liệu từ định dạng API sang định dạng đích
+        const transformedSongs: ITransformedSong[] = fetchedSongs.map(song => ({
+          id: song.id,
+          image: song.images.DEFAULT,
+          title: song.name,
+          // Lấy tên nghệ sĩ đầu tiên, hoặc "Unknown Artist" nếu không có
+          artist: song.artists && song.artists.length > 0 ? song.artists[0].name : 'Unknown Artist',
+          // Lấy URL audio đầu tiên, hoặc chuỗi rỗng nếu không có
+          song: song.audios && song.audios.length > 0 ? song.audios[0].url : '',
+          // Chuyển đổi duration từ number (giây) sang string.
+          // Bạn có thể format nó thành "MM:SS" nếu muốn, ví dụ:
+          // duration: Math.floor(song.duration / 60) + ':' + (song.duration % 60).toString().padStart(2, '0'),
+          duration: song.duration.toString(), // Chuyển thẳng sang string theo yêu cầu
+        }));
+
+        console.log('Dữ liệu bài hát đã chuyển đổi:', transformedSongs);
+
+      } catch (err: any) {
+        console.error('Đã xảy ra lỗi khi lấy hoặc ánh xạ bài hát đề xuất:', err);
+        // Trình bao bọc của bạn sẽ tự động hiển thị toast ở đây
+      } finally {
+      }
+    }
+
+    getAndMapRecommendedSongs();
+  }, []); 
+
 
   useEffect(() => {
     if (!audioRef.current) return;
