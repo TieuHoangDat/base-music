@@ -15,12 +15,14 @@
 ![Trang chủ](public/image/Screenshot/home.png "Trang chủ")
 ![Trang chủ](public/image/Screenshot/home2.png "Trang chủ")
 ![Tìm kiếm](public/image/Screenshot/search.png "Tìm kiếm")
+![Kết quả tìm kiếm](public/image/Screenshot/search1.png "Tìm kiếm")
 
 ---
 
 ## Màn mobile
 <div align="center">
-  <img src="public/image/Screenshot/home3.png" alt="Trang chủ" width="30%" style="display: inline-block; margin: 0 5px;">
-  <img src="public/image/Screenshot/sidebar.png" alt="sidebar" width="30%" style="display: inline-block; margin: 0 5px;">
-  <img src="public/image/Screenshot/search2.png" alt="Tìm kiếm" width="30%" style="display: inline-block; margin: 0 5px;">
+  <img src="public/image/Screenshot/home3.png" alt="Trang chủ" width="23%" style="display: inline-block; margin: 0 5px;">
+  <img src="public/image/Screenshot/sidebar.png" alt="sidebar" width="23%" style="display: inline-block; margin: 0 5px;">
+  <img src="public/image/Screenshot/search2.png" alt="Tìm kiếm" width="23%" style="display: inline-block; margin: 0 5px;">
+  <img src="public/image/Screenshot/search3.png" alt="Tìm kiếm" width="23%" style="display: inline-block; margin: 0 5px;">
 </div>

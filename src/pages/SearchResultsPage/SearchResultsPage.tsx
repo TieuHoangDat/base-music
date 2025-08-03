@@ -90,8 +90,8 @@ const SearchResultsPage: React.FC = () => {
 
     return (
         <div className="search-results-page">
-            <Typography variant="h4" component="h1" className="search-title">
-                Kết quả tìm kiếm cho "{keyword}"
+            <Typography variant="h4" component="p" className="search-title">
+                Kết quả tìm kiếm bài hát
             </Typography>
             {loading && currentPage === 1 ? ( // Chỉ hiển thị loading ban đầu khi tải trang 1
                 <Box className="loading-container">
