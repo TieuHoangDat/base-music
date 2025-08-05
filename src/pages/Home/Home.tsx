@@ -129,13 +129,13 @@ const Home = () => {
     );
   }
 
-  if (isErrorSongs || isErrorAlbums || isErrorArtists || isErrorGenres) { // Cập nhật điều kiện error
-    return (
-      <div className="h-screen flex items-center justify-center text-red-500">
-        <p>Lỗi khi tải dữ liệu: {errorSongs?.message || errorAlbums?.message || errorArtists?.message || errorGenres?.message || "Không thể tải dữ liệu."}</p>
-      </div>
-    );
-  }
+  // if (isErrorSongs || isErrorAlbums || isErrorArtists || isErrorGenres) { // Cập nhật điều kiện error
+  //   return (
+  //     <div className="h-screen flex items-center justify-center text-red-500">
+  //       <p>Lỗi khi tải dữ liệu: {errorSongs?.message || errorAlbums?.message || errorArtists?.message || errorGenres?.message || "Không thể tải dữ liệu."}</p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="h-screen overflow-y-auto overflow-x-hidden hide-scrollbar container">
